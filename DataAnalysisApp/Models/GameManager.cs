@@ -37,17 +37,18 @@ public class GameManager
             .Where(game => game.Year != null) // Filter out null years
             .Where(game => game.Year != "") // Filter out null years
             .Where(game => game.Year != "N/A") // Filter out null years
-            .GroupBy(game => game.Year)
-            .Select(group => new YearCount
-            {
-                Year = Convert.ToInt32(group.Key),
-                Count = group.Count()
-            })
-            .OrderByDescending(yearCount => yearCount.Count)
-            .ToList();
+                  .GroupBy(game => Convert.ToInt32(game.Year))
+        .Select(group => new YearCount
+        {
+            Year = group.Key,
+            Count = group.Count()
+        })
+        .OrderBy(yearCount => yearCount.Year) // Order by year (ascending)
+        .ToList();
 
         return yearCounts;
     }
+
 
 
     public List<PlatformPercentage> GetPlatformPercentages()
@@ -104,48 +105,4 @@ public class GameManager
 
         return publisherCounts;
     }
-
-
-
-
-    // public (List<MovieWithAggregatedRatings> MovieRatings, List<dynamic> GenreCounts) JoinMoviesAndRatings()
-    // {
-    //     var movie_ratings = Movies.Join(MovieRatings,
-    //             movie => movie.MovieId,
-    //             rating => rating.MovieId,
-    //             (movie, rating) => new
-    //             {
-    //                 movie.MovieId,
-    //                 movie.Title,
-    //                 Genres = movie.Genres.Split('|').ToList(), // Splitting here
-    //                 rating.Rating,
-    //             })
-    //             .GroupBy(movie_rating => movie_rating.MovieId)
-    //             .Select(group => new MovieWithAggregatedRatings(
-    //                 group.Key,
-    //                 group.First().Title,
-    //                 string.Join("|", group.First().Genres), // Convert List<string> back to string
-    //                 group.Average(mr => mr.Rating),
-    //                 group.Count()
-    //             ))
-    //             .Where(movie_rating => movie_rating.ReviewCount > 200)
-    //             .OrderByDescending(movie_rating => movie_rating.AverageRating)
-    //             .Take(100)
-    //             .ToList();
-
-    //     var totalGenreCount = movie_ratings.Sum(movie_rating => movie_rating.Genres.Split('|').Length);
-
-    //     var genreCounts = movie_ratings.SelectMany(movie_rating => movie_rating.Genres.Split('|'))
-    //                            .GroupBy(genre => genre)
-    //                            .Select(group => (dynamic)new
-    //                            {
-    //                                Genre = group.Key,
-    //                                Count = group.Count(),
-    //                                Percentage = (group.Count() / (double)totalGenreCount) * 100
-    //                            })
-    //                            .OrderByDescending(genre => genre.Percentage)
-    //                            .ToList();
-
-    //     return (movie_ratings, genreCounts);
-    // }
 }

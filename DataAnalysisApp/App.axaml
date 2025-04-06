@@ -1,8 +1,17 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:models="using:DataAnalysisApp.Models"
-             x:Class="DataAnalysisApp.App">
+             x:Class="DataAnalysisApp.App"
+             RequestedThemeVariant="Light">
     <Application.Resources>
         <models:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </Application.Resources>
+
+     <!-- <Application.DataTemplates>
+         <local:ViewLocator/>
+     </Application.DataTemplates> -->
+   
+     <Application.Styles>
+         <FluentTheme />
+     </Application.Styles>
 </Application>

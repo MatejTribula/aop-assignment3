@@ -12,13 +12,21 @@
         </Grid.RowDefinitions>
 
         <!-- Buttons -->
-        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Top 10 Best Selling Games" Command="{Binding ShowGlobalSalesCommand}" Margin="5"/>
-            <Button Content="Yearly Count" Command="{Binding ShowYearlyCountCommand}" Margin="5"/>
-            <Button Content="Genres" Command="{Binding ShowGenrePercentageCommand}" Margin="5"/>
-            <Button Content="Platforms" Command="{Binding ShowPlatformPercentageCommand}" Margin="5"/>
-            <Button Content="Publishers" Command="{Binding ShowPublisherPercentageCommand}" Margin="5"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center"  Background="DodgerBlue" >
+
+            <TextBlock Margin="0 5" FontSize="18" FontWeight="Bold" Foreground="White">Heading</TextBlock>
+
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Top 10 Best Selling Games" Command="{Binding ShowGlobalSalesCommand}" Margin="5" Foreground="White"/>
+                <Button Content="No. of games released every year (1980-2020)" Command="{Binding ShowYearlyCountCommand}" Margin="5" Foreground="White"/>
+                <Button Content="Genre percentage" Command="{Binding ShowGenrePercentageCommand}" Margin="5" Foreground="White"/>
+                <Button Content="Platform percentage" Command="{Binding ShowPlatformPercentageCommand}" Margin="5" Foreground="White"/>
+                <Button Content="Top 10 Biggest Publishers" Command="{Binding ShowPublisherPercentageCommand}" Margin="5" Foreground="White"/>
+            </StackPanel>
+
         </StackPanel>
+
 
         <!-- Charts -->
         <lvc:CartesianChart Grid.Row="1"
@@ -28,19 +36,26 @@
 
         <lvc:CartesianChart Grid.Row="1"
                             Series="{Binding YearlyCountSeries}"
-                            XAxes="{Binding XAxes}"
+                            XAxes="{Binding XAxesYear}"
+                            YAxes="{Binding YAxesYear}"
                             IsVisible="{Binding IsYearlyCountVisible}"/>
 
         <lvc:PieChart Grid.Row="1"
                       Series="{Binding GenrePercentageSeries}"
-                      IsVisible="{Binding IsGenrePercentageVisible}"/>
+                      IsVisible="{Binding IsGenrePercentageVisible}"
+                      LegendPosition="Right"/>
+                      
 
         <lvc:PieChart Grid.Row="1"
                       Series="{Binding PlatformPercentageSeries}"
-                      IsVisible="{Binding IsPlatformPercentageVisible}"/>
+                      IsVisible="{Binding IsPlatformPercentageVisible}"
+                      LegendPosition="Right"/>
+
 
         <lvc:PieChart Grid.Row="1"
                       Series="{Binding PublisherPercentageSeries}"
-                      IsVisible="{Binding IsPublisherPercentageVisible}"/>
+                      IsVisible="{Binding IsPublisherPercentageVisible}"
+                      LegendPosition="Right"/>
+
     </Grid>
 </Window>

@@ -16,8 +16,11 @@ public partial class MainWindowViewModel : ViewModelBase
     public ISeries[] PlatformPercentageSeries { get; set; } = new ISeries[0];
     public ISeries[] PublisherPercentageSeries { get; set; } = new ISeries[0];
     public Axis[] XAxes { get; set; } = new Axis[0];
+    public Axis[] XAxesYear { get; set; } = new Axis[0];
+    public Axis[] YAxesYear { get; set; } = new Axis[0];
 
-    public bool IsGlobalSalesVisible { get; set; } = false;
+
+    public bool IsGlobalSalesVisible { get; set; } = true;
     public bool IsYearlyCountVisible { get; set; } = false;
     public bool IsGenrePercentageVisible { get; set; } = false;
     public bool IsPlatformPercentageVisible { get; set; } = false;
@@ -100,6 +103,26 @@ public partial class MainWindowViewModel : ViewModelBase
                 LabelsRotation = 45
             }
         };
+
+        XAxesYear = new Axis[]
+{
+    new Axis
+    {
+        Labels = yearlyGameCount.Select(y => y.Year.ToString()).ToArray(),
+        LabelsRotation = 45,
+        Name = "Year"
+    }
+    };
+
+        YAxesYear = new Axis[]
+{
+    new Axis
+    {
+        Name = "Number of Games"
+    }
+};
+
+
     }
 
     private void ShowGraph(string graphName)
