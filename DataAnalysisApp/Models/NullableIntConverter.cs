@@ -5,7 +5,7 @@ using CsvHelper.TypeConversion;
 
 public class IntToStringConverter : DefaultTypeConverter
 {
-    public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
+    public override object ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
     {
         if (string.IsNullOrWhiteSpace(text) || string.Equals(text, "N/A", StringComparison.OrdinalIgnoreCase))
         {
