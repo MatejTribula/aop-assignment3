@@ -1,70 +1,46 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
         xmlns:vm="using:DataAnalysisApp.ViewModels"
-        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="DataAnalysisApp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="DataAnalysisApp">
-
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-
-
+        Title="Data Analysis App">
     <Grid>
-        <!-- Define rows in the parent Grid -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/> <!-- For the StackPanel with buttons -->
             <RowDefinition Height="*" />   <!-- For the chart -->
         </Grid.RowDefinitions>
 
-        <!-- StackPanel with buttons, placed in the first row -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0">
-            <Button Content="Top 10 best selling games" Margin="5"/>
-            <Button Content="Platform"  Margin="5"/>
-            <Button Content="Genres"  Margin="5"/>
-            <Button Content="Publisher"  Margin="5"/>
+        <!-- Buttons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Top 10 Best Selling Games" Command="{Binding ShowGlobalSalesCommand}" Margin="5"/>
+            <Button Content="Yearly Count" Command="{Binding ShowYearlyCountCommand}" Margin="5"/>
+            <Button Content="Genres" Command="{Binding ShowGenrePercentageCommand}" Margin="5"/>
+            <Button Content="Platforms" Command="{Binding ShowPlatformPercentageCommand}" Margin="5"/>
+            <Button Content="Publishers" Command="{Binding ShowPublisherPercentageCommand}" Margin="5"/>
         </StackPanel>
 
-        
-        <lvc:CartesianChart
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Grid.Row="1"
-            Series="{Binding GlobalSalesSeries}"
-            XAxes="{Binding XAxes}"
-            LegendPosition="Top"/>
+        <!-- Charts -->
+        <lvc:CartesianChart Grid.Row="1"
+                            Series="{Binding GlobalSalesSeries}"
+                            XAxes="{Binding XAxes}"
+                            IsVisible="{Binding IsGlobalSalesVisible}"/>
 
-        <lvc:CartesianChart
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Grid.Row="1"
-            Series="{Binding YearlyCountSeries}"
-            XAxes="{Binding XAxes}"
-            LegendPosition="Top"/>
+        <lvc:CartesianChart Grid.Row="1"
+                            Series="{Binding YearlyCountSeries}"
+                            XAxes="{Binding XAxes}"
+                            IsVisible="{Binding IsYearlyCountVisible}"/>
 
-             <lvc:PieChart Grid.Row="1"
-                      Series="{Binding GenrePercentageSeries}" 
-                      LegendPosition="Right"/>
+        <lvc:PieChart Grid.Row="1"
+                      Series="{Binding GenrePercentageSeries}"
+                      IsVisible="{Binding IsGenrePercentageVisible}"/>
 
-             <lvc:PieChart Grid.Row="1"
-                      Series="{Binding PlatformPercentageSeries}" 
-                      LegendPosition="Right"/>
+        <lvc:PieChart Grid.Row="1"
+                      Series="{Binding PlatformPercentageSeries}"
+                      IsVisible="{Binding IsPlatformPercentageVisible}"/>
 
-             <lvc:PieChart Grid.Row="1"
-                      Series="{Binding PublisherPercentageSeries}" 
-                      LegendPosition="Right"/>
+        <lvc:PieChart Grid.Row="1"
+                      Series="{Binding PublisherPercentageSeries}"
+                      IsVisible="{Binding IsPublisherPercentageVisible}"/>
     </Grid>
-
-
-
-       
-    
 </Window>
