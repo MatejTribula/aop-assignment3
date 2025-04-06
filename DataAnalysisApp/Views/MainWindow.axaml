@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:DataAnalysisApp.ViewModels"
+        xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -15,6 +16,55 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding TestData}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
+
+    <Grid>
+        <!-- Define rows in the parent Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- For the StackPanel with buttons -->
+            <RowDefinition Height="*" />   <!-- For the chart -->
+        </Grid.RowDefinitions>
+
+        <!-- StackPanel with buttons, placed in the first row -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0">
+            <Button Content="Top 10 best selling games" Margin="5"/>
+            <Button Content="Platform"  Margin="5"/>
+            <Button Content="Genres"  Margin="5"/>
+            <Button Content="Publisher"  Margin="5"/>
+        </StackPanel>
+
+        
+        <lvc:CartesianChart
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Grid.Row="1"
+            Series="{Binding GlobalSalesSeries}"
+            XAxes="{Binding XAxes}"
+            LegendPosition="Top"/>
+
+        <lvc:CartesianChart
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Grid.Row="1"
+            Series="{Binding YearlyCountSeries}"
+            XAxes="{Binding XAxes}"
+            LegendPosition="Top"/>
+
+             <lvc:PieChart Grid.Row="1"
+                      Series="{Binding GenrePercentageSeries}" 
+                      LegendPosition="Right"/>
+
+             <lvc:PieChart Grid.Row="1"
+                      Series="{Binding PlatformPercentageSeries}" 
+                      LegendPosition="Right"/>
+
+             <lvc:PieChart Grid.Row="1"
+                      Series="{Binding PublisherPercentageSeries}" 
+                      LegendPosition="Right"/>
+    </Grid>
+
+
+
+       
+    
 </Window>

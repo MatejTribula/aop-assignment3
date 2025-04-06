@@ -1,25 +1,24 @@
 using CsvHelper.Configuration.Attributes;
-
 public class Game
 {
     [Name("Rank")]
     public int Rank { get; set; }
 
     [Name("Name")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [Name("Platform")]
-    public string Platform { get; set; }
+    public required string Platform { get; set; }
 
     [Name("Year")]
-    [TypeConverter(typeof(NullableIntConverter))]
-    public int? Year { get; set; }
+    [TypeConverter(typeof(IntToStringConverter))]
+    public string? Year { get; set; }
 
     [Name("Genre")]
-    public string Genre { get; set; }
+    public required string Genre { get; set; }
 
     [Name("Publisher")]
-    public string Publisher { get; set; }
+    public required string Publisher { get; set; }
 
     [Name("NA_Sales")]
     public double NASales { get; set; }
@@ -38,7 +37,7 @@ public class Game
 
     public Game() { }
 
-    public Game(int rank, string name, string platform, int? year, string genre, string publisher,
+    public Game(int rank, string name, string platform, string year, string genre, string publisher,
         double naSales, double euSales, double jpSales, double otherSales, double globalSales)
     {
         Rank = rank;

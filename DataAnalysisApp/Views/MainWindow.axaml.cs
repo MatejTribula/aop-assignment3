@@ -1,11 +1,14 @@
 using Avalonia.Controls;
+using DataAnalysisApp.ViewModels;
 
-namespace DataAnalysisApp.Views;
-
-public partial class MainWindow : Window
+namespace DataAnalysisApp.Views
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = new MainWindowViewModel(); // Set the DataContext here
+        }
     }
 }
