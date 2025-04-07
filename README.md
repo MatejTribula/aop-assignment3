@@ -17,10 +17,13 @@ remove graphs easily to adjust the displayed data as needed.
 
 
 ## Overview
-1. User is presented with graph of Top 10 best-selling video games upon start of the application
-2. User can choose from 5 different preset queries
-3. Every query displays different graph relevant to the data provided
-4. User is able to resize the whole application window, without compromising the readability of the graph (bonus task) 
+
+1. The user is presented with a graph of the **Top 10 best-selling video games** when the application starts.
+2. The user can choose from **five different preset queries**.
+3. Each query displays a **different graph** relevant to the selected data.
+4. When a new query is selected, the **previous graph is removed**, and a new relevant graph is displayed.
+5. The user can **resize the application window** without compromising the **readability of the graph** (bonus task).
+
 
 
 ## Running the Application
